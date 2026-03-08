@@ -435,7 +435,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 4.  Should automatically save data after each modifying command.
 5.  Should store data locally on the user’s device and not require Internet access for normal operation.
 6.  Is not required to automate the internship application process since it only serves as a local application logbook.
-7. Should respond to typical commands within 2 seconds under normal usage conditions.
+7.  Should respond to typical commands within 2 seconds under normal usage conditions.
 
 *{More to be added}*
 
