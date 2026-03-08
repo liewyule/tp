@@ -2,7 +2,7 @@
   "applications": [ {
     "company": "Hans Muster",
     "phone": "9482424",
-    "email": "invalid@email!3e",
+    "applicationDate": "2026/03/09",
     "address": "4th street"
   } ]
 }

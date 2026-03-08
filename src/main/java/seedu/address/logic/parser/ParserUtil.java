@@ -89,7 +89,7 @@ public class ParserUtil {
     public static ApplicationDate parseApplicationDate(String applicationDate) throws ParseException {
         requireNonNull(applicationDate);
         String trimmedApplicationDate = applicationDate.trim();
-        if (!ApplicationDate.isValidApplicationDate(applicationDate)) {
+        if (!ApplicationDate.isValidApplicationDate(trimmedApplicationDate)) {
             throw new ParseException(ApplicationDate.MESSAGE_CONSTRAINTS);
         }
         return new ApplicationDate(trimmedApplicationDate);
