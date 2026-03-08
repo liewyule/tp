@@ -3,8 +3,8 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -54,7 +54,8 @@ public class EditCommandParser implements Parser<EditCommand> {
             editApplicationDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_APPLICATION_DATE).isPresent()) {
-            editApplicationDescriptor.setApplicationDate(ParserUtil.parseApplicationDate(argMultimap.getValue(PREFIX_APPLICATION_DATE).get()));
+            editApplicationDescriptor.setApplicationDate(ParserUtil.parseApplicationDate(
+                    argMultimap.getValue(PREFIX_APPLICATION_DATE).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
             editApplicationDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
