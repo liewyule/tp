@@ -19,7 +19,7 @@ public class Application {
     // Identity fields
     private final Company company;
     private final Phone phone;
-    private final Email email;
+    private final ApplicationDate applicationDate;
 
     // Data fields
     private final Address address;
@@ -28,11 +28,11 @@ public class Application {
     /**
      * Every field must be present and not null.
      */
-    public Application(Company company, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(company, phone, email, address, tags);
+    public Application(Company company, Phone phone, ApplicationDate applicationDate, Address address, Set<Tag> tags) {
+        requireAllNonNull(company, phone, applicationDate, address, tags);
         this.company = company;
         this.phone = phone;
-        this.email = email;
+        this.applicationDate = applicationDate;
         this.address = address;
         this.tags.addAll(tags);
     }
@@ -45,8 +45,8 @@ public class Application {
         return phone;
     }
 
-    public Email getEmail() {
-        return email;
+    public ApplicationDate getApplicationDate() {
+        return applicationDate;
     }
 
     public Address getAddress() {
@@ -92,7 +92,7 @@ public class Application {
         Application otherApplication = (Application) other;
         return company.equals(otherApplication.company)
                 && phone.equals(otherApplication.phone)
-                && email.equals(otherApplication.email)
+                && applicationDate.equals(otherApplication.applicationDate)
                 && address.equals(otherApplication.address)
                 && tags.equals(otherApplication.tags);
     }
@@ -100,7 +100,7 @@ public class Application {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(company, phone, email, address, tags);
+        return Objects.hash(company, phone, applicationDate, address, tags);
     }
 
     @Override
@@ -108,7 +108,7 @@ public class Application {
         return new ToStringBuilder(this)
                 .add("company", company)
                 .add("phone", phone)
-                .add("email", email)
+                .add("applicationDate", applicationDate)
                 .add("address", address)
                 .add("tags", tags)
                 .toString();
