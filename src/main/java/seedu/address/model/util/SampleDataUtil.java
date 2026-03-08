@@ -6,11 +6,11 @@ import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
-import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Company;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.Phone;
+import seedu.address.model.application.Url;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -20,22 +20,22 @@ public class SampleDataUtil {
     public static Application[] getSampleApplications() {
         return new Application[] {
             new Application(new Company("Alex Yeoh"), new Phone("87438807"), new Email("alexyeoh@example.com"),
-                new Address("Blk 30 Geylang Street 29, #06-40"),
+                new Url("https://www.alexyeoh.com"),
                 getTagSet("friends")),
             new Application(new Company("Bernice Yu"), new Phone("99272758"), new Email("berniceyu@example.com"),
-                new Address("Blk 30 Lorong 3 Serangoon Gardens, #07-18"),
+                new Url("https://www.berniceyu.com"),
                 getTagSet("colleagues", "friends")),
             new Application(new Company("Google"), new Phone("93210283"), new Email("charlotte@example.com"),
-                new Address("Blk 11 Ang Mo Kio Street 74, #11-04"),
+                new Url("https://www.google.com"),
                 getTagSet("neighbours")),
             new Application(new Company("David Li"), new Phone("91031282"), new Email("lidavid@example.com"),
-                new Address("Blk 436 Serangoon Gardens Street 26, #16-43"),
+                new Url("https://www.lidavid.com"),
                 getTagSet("family")),
             new Application(new Company("Irfan Ibrahim"), new Phone("92492021"), new Email("irfan@example.com"),
-                new Address("Blk 47 Tampines Street 20, #17-35"),
+                new Url("https://www.irfan.com"),
                 getTagSet("classmates")),
             new Application(new Company("Roy Balakrishnan"), new Phone("92624417"), new Email("royb@example.com"),
-                new Address("Blk 45 Aljunied Street 85, #11-31"),
+                new Url("https://www.roybalakrishnan.com"),
                 getTagSet("colleagues"))
         };
     }

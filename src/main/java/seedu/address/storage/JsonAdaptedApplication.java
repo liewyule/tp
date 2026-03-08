@@ -10,11 +10,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.Company;
 import seedu.address.model.application.Email;
 import seedu.address.model.application.Phone;
+import seedu.address.model.application.Url;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +27,7 @@ class JsonAdaptedApplication {
     private final String company;
     private final String phone;
     private final String email;
-    private final String address;
+    private final String url;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -35,12 +35,12 @@ class JsonAdaptedApplication {
      */
     @JsonCreator
     public JsonAdaptedApplication(@JsonProperty("company") String company, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
+            @JsonProperty("email") String email, @JsonProperty("url") String url,
             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.company = company;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.url = url;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -53,7 +53,7 @@ class JsonAdaptedApplication {
         company = source.getCompany().value;
         phone = source.getPhone().value;
         email = source.getEmail().value;
-        address = source.getAddress().value;
+        url = source.getUrl().value;
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -94,16 +94,16 @@ class JsonAdaptedApplication {
         }
         final Email modelEmail = new Email(email);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        if (url == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Url.class.getSimpleName()));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+        if (!Url.isValidUrl(url)) {
+            throw new IllegalValueException(Url.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Url modelUrl = new Url(url);
 
         final Set<Tag> modelTags = new HashSet<>(applicationTags);
-        return new Application(modelCompany, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Application(modelCompany, modelPhone, modelEmail, modelUrl, modelTags);
     }
 
 }

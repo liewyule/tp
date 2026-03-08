@@ -1,12 +1,11 @@
 package seedu.address.model.application;
 
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.tag.Tag;
 
@@ -22,18 +21,18 @@ public class Application {
     private final Email email;
 
     // Data fields
-    private final Address address;
+    private final Url url;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Application(Company company, Phone phone, Email email, Address address, Set<Tag> tags) {
-        requireAllNonNull(company, phone, email, address, tags);
+    public Application(Company company, Phone phone, Email email, Url url, Set<Tag> tags) {
+        requireAllNonNull(company, phone, email, url, tags);
         this.company = company;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+        this.url = url;
         this.tags.addAll(tags);
     }
 
@@ -49,8 +48,8 @@ public class Application {
         return email;
     }
 
-    public Address getAddress() {
-        return address;
+    public Url getUrl() {
+        return url;
     }
 
     /**
@@ -93,14 +92,14 @@ public class Application {
         return company.equals(otherApplication.company)
                 && phone.equals(otherApplication.phone)
                 && email.equals(otherApplication.email)
-                && address.equals(otherApplication.address)
+                && url.equals(otherApplication.url)
                 && tags.equals(otherApplication.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(company, phone, email, address, tags);
+        return Objects.hash(company, phone, email, url, tags);
     }
 
     @Override
@@ -109,7 +108,7 @@ public class Application {
                 .add("company", company)
                 .add("phone", phone)
                 .add("email", email)
-                .add("address", address)
+                .add("url", url)
                 .add("tags", tags)
                 .toString();
     }

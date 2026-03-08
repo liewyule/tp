@@ -42,8 +42,8 @@ public class Messages {
                 .append(application.getPhone())
                 .append("; Email: ")
                 .append(application.getEmail())
-                .append("; Address: ")
-                .append(application.getAddress())
+                .append("; URL: ")
+                .append(application.getUrl())
                 .append("; Tags: ");
         application.getTags().forEach(builder::append);
         return builder.toString();

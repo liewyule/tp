@@ -50,7 +50,7 @@ public class ApplicationCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         company.setText(application.getCompany().value);
         phone.setText(application.getPhone().value);
-        address.setText(application.getAddress().value);
+        address.setText(application.getUrl().value);
         email.setText(application.getEmail().value);
         application.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
