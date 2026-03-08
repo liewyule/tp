@@ -93,7 +93,7 @@ class JsonAdaptedApplication {
         if (!ApplicationDate.isValidApplicationDate(applicationDate)) {
             throw new IllegalValueException(ApplicationDate.MESSAGE_CONSTRAINTS);
         }
-        final ApplicationDate modelEmail = new ApplicationDate(applicationDate);
+        final ApplicationDate modelApplicationDate = new ApplicationDate(applicationDate);
 
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -104,7 +104,7 @@ class JsonAdaptedApplication {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(applicationTags);
-        return new Application(modelCompany, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Application(modelCompany, modelPhone, modelApplicationDate, modelAddress, modelTags);
     }
 
 }

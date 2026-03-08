@@ -30,7 +30,7 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_COMPANY + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_APPLICATION_DATE + "johnd@example.com "
+            + PREFIX_APPLICATION_DATE + "2025-02-14 "
             + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
