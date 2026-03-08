@@ -10,8 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.application.Address;
-import seedu.address.model.application.Company;
 import seedu.address.model.application.ApplicationDate;
+import seedu.address.model.application.Company;
 import seedu.address.model.application.Phone;
 import seedu.address.model.tag.Tag;
 
