@@ -192,7 +192,7 @@ public class EditCommand extends Command {
         public Optional<Url> getUrl() {
             return Optional.ofNullable(url);
         }
-        
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
