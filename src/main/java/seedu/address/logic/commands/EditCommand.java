@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_URL;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_APPLICATIONS;
 
 import java.util.Collections;
@@ -21,11 +21,11 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
 import seedu.address.model.application.Role;
+import seedu.address.model.application.Url;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -42,11 +42,12 @@ public class EditCommand extends Command {
             + "[" + PREFIX_COMPANY + "COMPANY] "
             + "[" + PREFIX_ROLE + "ROLE] "
             + "[" + PREFIX_APPLICATION_DATE + "APPLICATION_DATE] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_URL + "URL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ROLE + "Software Engineer Intern "
-            + PREFIX_APPLICATION_DATE + "2025-12-22";
+            + PREFIX_APPLICATION_DATE + "2025-12-22 "
+            + PREFIX_URL + "https://www.example.com";
 
     public static final String MESSAGE_EDIT_APPLICATION_SUCCESS = "Edited Application: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
@@ -100,10 +101,12 @@ public class EditCommand extends Command {
         Role updatedRole = editApplicationDescriptor.getRole().orElse(applicationToEdit.getRole());
         ApplicationDate updatedApplicationDate = editApplicationDescriptor.getApplicationDate().orElse(
                 applicationToEdit.getApplicationDate());
-        Address updatedAddress = editApplicationDescriptor.getAddress().orElse(applicationToEdit.getAddress());
+        Optional<Url> updatedUrl = editApplicationDescriptor.getUrl().isPresent()
+                ? editApplicationDescriptor.getUrl()
+                : applicationToEdit.getUrl();
         Set<Tag> updatedTags = editApplicationDescriptor.getTags().orElse(applicationToEdit.getTags());
 
-        return new Application(updatedCompany, updatedRole, updatedApplicationDate, updatedAddress, updatedTags);
+        return new Application(updatedCompany, updatedRole, updatedApplicationDate, updatedUrl, updatedTags);
     }
 
     @Override
@@ -138,7 +141,7 @@ public class EditCommand extends Command {
         private Company company;
         private Role role;
         private ApplicationDate applicationDate;
-        private Address address;
+        private Url url;
         private Set<Tag> tags;
 
         public EditApplicationDescriptor() {}
@@ -151,7 +154,7 @@ public class EditCommand extends Command {
             setCompany(toCopy.company);
             setRole(toCopy.role);
             setApplicationDate(toCopy.applicationDate);
-            setAddress(toCopy.address);
+            setUrl(toCopy.url);
             setTags(toCopy.tags);
         }
 
@@ -159,7 +162,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(company, role, applicationDate, address, tags);
+            return CollectionUtil.isAnyNonNull(company, role, applicationDate, url, tags);
         }
 
         public void setCompany(Company company) {
@@ -186,12 +189,12 @@ public class EditCommand extends Command {
             return Optional.ofNullable(applicationDate);
         }
 
-        public void setAddress(Address address) {
-            this.address = address;
+        public void setUrl(Url url) {
+            this.url = url;
         }
 
-        public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+        public Optional<Url> getUrl() {
+            return Optional.ofNullable(url);
         }
 
         /**
@@ -226,7 +229,7 @@ public class EditCommand extends Command {
             return Objects.equals(company, otherEditApplicationDescriptor.company)
                     && Objects.equals(role, otherEditApplicationDescriptor.role)
                     && Objects.equals(applicationDate, otherEditApplicationDescriptor.applicationDate)
-                    && Objects.equals(address, otherEditApplicationDescriptor.address)
+                    && Objects.equals(url, otherEditApplicationDescriptor.url)
                     && Objects.equals(tags, otherEditApplicationDescriptor.tags);
         }
 
@@ -236,7 +239,7 @@ public class EditCommand extends Command {
                     .add("company", company)
                     .add("role", role)
                     .add("applicationDate", applicationDate)
-                    .add("address", address)
+                    .add("url", url)
                     .add("tags", tags)
                     .toString();
         }

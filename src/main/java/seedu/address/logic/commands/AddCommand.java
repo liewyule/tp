@@ -1,11 +1,11 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_URL;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -25,13 +25,13 @@ public class AddCommand extends Command {
             + PREFIX_COMPANY + "COMPANY "
             + PREFIX_ROLE + "ROLE "
             + PREFIX_APPLICATION_DATE + "APPLICATION_DATE "
-            + PREFIX_ADDRESS + "ADDRESS "
+            + "[" + PREFIX_URL + "URL] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_COMPANY + "John Doe "
             + PREFIX_ROLE + "Software Engineer "
             + PREFIX_APPLICATION_DATE + "2025-02-14 "
-            + PREFIX_ADDRESS + "311, Clementi Ave 2, #02-25 "
+            + PREFIX_URL + "https://www.example.com "
             + PREFIX_TAG + "friends "
             + PREFIX_TAG + "owesMoney";
 

@@ -3,10 +3,10 @@ package seedu.address.logic;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_APPLICATION_DISPLAYED_INDEX;
 import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.APPLICATION_DATE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.COMPANY_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ROLE_DESC_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.URL_DESC_AMY;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.AMY;
 
@@ -32,6 +32,7 @@ import seedu.address.storage.JsonAddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ApplicationBuilder;
+
 
 public class LogicManagerTest {
     private static final IOException DUMMY_IO_EXCEPTION = new IOException("dummy IO exception");
@@ -166,7 +167,7 @@ public class LogicManagerTest {
 
         // Triggers the saveAddressBook method by executing an add command
         String addCommand = AddCommand.COMMAND_WORD + COMPANY_DESC_AMY + ROLE_DESC_AMY
-                + APPLICATION_DATE_DESC_AMY + ADDRESS_DESC_AMY;
+                + APPLICATION_DATE_DESC_AMY + URL_DESC_AMY;
         Application expectedApplication = new ApplicationBuilder(AMY).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addApplication(expectedApplication);

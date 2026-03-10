@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.util.ToStringBuilder;
@@ -22,18 +23,18 @@ public class Application {
     private final ApplicationDate applicationDate;
 
     // Data fields
-    private final Address address;
+    private final Optional<Url> url;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
-    public Application(Company company, Role role, ApplicationDate applicationDate, Address address, Set<Tag> tags) {
-        requireAllNonNull(company, role, applicationDate, address, tags);
+    public Application(Company company, Role role, ApplicationDate applicationDate, Optional<Url> url, Set<Tag> tags) {
+        requireAllNonNull(company, role, applicationDate, url, tags);
         this.company = company;
         this.role = role;
         this.applicationDate = applicationDate;
-        this.address = address;
+        this.url = url;
         this.tags.addAll(tags);
     }
 
@@ -49,8 +50,8 @@ public class Application {
         return applicationDate;
     }
 
-    public Address getAddress() {
-        return address;
+    public Optional<Url> getUrl() {
+        return url;
     }
 
     /**
@@ -94,14 +95,14 @@ public class Application {
         return company.equals(otherApplication.company)
                 && role.equals(otherApplication.role)
                 && applicationDate.equals(otherApplication.applicationDate)
-                && address.equals(otherApplication.address)
+                && url.equals(otherApplication.url)
                 && tags.equals(otherApplication.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(company, role, applicationDate, address, tags);
+        return Objects.hash(company, role, applicationDate, url, tags);
     }
 
     @Override
@@ -110,7 +111,7 @@ public class Application {
                 .add("company", company)
                 .add("role", role)
                 .add("applicationDate", applicationDate)
-                .add("address", address)
+                .add("url", url)
                 .add("tags", tags)
                 .toString();
     }

@@ -1,10 +1,10 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_APPLICATION_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_COMPANY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_URL;
 
 import java.util.Set;
 
@@ -33,7 +33,7 @@ public class ApplicationUtil {
         sb.append(PREFIX_COMPANY + application.getCompany().value + " ");
         sb.append(PREFIX_ROLE + application.getRole().value + " ");
         sb.append(PREFIX_APPLICATION_DATE + application.getApplicationDate().value + " ");
-        sb.append(PREFIX_ADDRESS + application.getAddress().value + " ");
+        application.getUrl().ifPresent(url -> sb.append(PREFIX_URL + url.value + " "));
         application.getTags().stream().forEach(
             s -> sb.append(PREFIX_TAG + s.tagName + " ")
         );
@@ -49,7 +49,7 @@ public class ApplicationUtil {
         descriptor.getRole().ifPresent(role -> sb.append(PREFIX_ROLE).append(role.value).append(" "));
         descriptor.getApplicationDate().ifPresent(applicationDate ->
                 sb.append(PREFIX_APPLICATION_DATE).append(applicationDate.value).append(" "));
-        descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.value).append(" "));
+        descriptor.getUrl().ifPresent(url -> sb.append(PREFIX_URL).append(url.value).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
             if (tags.isEmpty()) {

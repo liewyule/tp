@@ -3,6 +3,7 @@ package seedu.address.storage;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,11 +11,11 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.application.Address;
 import seedu.address.model.application.Application;
 import seedu.address.model.application.ApplicationDate;
 import seedu.address.model.application.Company;
 import seedu.address.model.application.Role;
+import seedu.address.model.application.Url;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -27,7 +28,7 @@ class JsonAdaptedApplication {
     private final String company;
     private final String role;
     private final String applicationDate;
-    private final String address;
+    private final String url;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -36,12 +37,12 @@ class JsonAdaptedApplication {
     @JsonCreator
     public JsonAdaptedApplication(@JsonProperty("company") String company, @JsonProperty("role") String role,
                                   @JsonProperty("applicationDate") String applicationDate,
-                                  @JsonProperty("address") String address,
+                                  @JsonProperty("url") String url,
                                   @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.company = company;
         this.role = role;
         this.applicationDate = applicationDate;
-        this.address = address;
+        this.url = url;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -54,7 +55,7 @@ class JsonAdaptedApplication {
         company = source.getCompany().value;
         role = source.getRole().value;
         applicationDate = source.getApplicationDate().value;
-        address = source.getAddress().value;
+        url = source.getUrl().map(u -> u.value).orElse(null);
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -96,16 +97,16 @@ class JsonAdaptedApplication {
         }
         final ApplicationDate modelApplicationDate = new ApplicationDate(applicationDate);
 
-        if (address == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        Optional<Url> modelUrl = Optional.empty();
+        if (url != null) {
+            if (!Url.isValidUrl(url)) {
+                throw new IllegalValueException(Url.MESSAGE_CONSTRAINTS);
+            }
+            modelUrl = Optional.of(new Url(url));
         }
-        if (!Address.isValidAddress(address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
-        }
-        final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(applicationTags);
-        return new Application(modelCompany, modelRole, modelApplicationDate, modelAddress, modelTags);
+        return new Application(modelCompany, modelRole, modelApplicationDate, modelUrl, modelTags);
     }
 
 }

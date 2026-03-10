@@ -35,7 +35,7 @@ public class ApplicationCard extends UiPart<Region> {
     @FXML
     private Label phone;
     @FXML
-    private Label address;
+    private Label url;
     @FXML
     private Label applicationDate;
     @FXML
@@ -50,7 +50,7 @@ public class ApplicationCard extends UiPart<Region> {
         id.setText(displayedIndex + ". ");
         company.setText(application.getCompany().value);
         phone.setText(application.getRole().value);
-        address.setText(application.getAddress().value);
+        url.setText(application.getUrl().map(u -> u.value).orElse("url: -"));
         applicationDate.setText(application.getApplicationDate().value);
         application.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))

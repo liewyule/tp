@@ -3,11 +3,11 @@ package seedu.address.model.application;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.ALICE;
 import static seedu.address.testutil.TypicalApplications.BOB;
@@ -34,7 +34,7 @@ public class ApplicationTest {
 
         // same company and role, all other attributes different -> returns true
         Application editedAlice = new ApplicationBuilder(ALICE).withApplicationDate(VALID_APPLICATION_DATE_BOB)
-                .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+                .withUrl(VALID_URL_BOB).withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameApplication(editedAlice));
 
         // different company, all other attributes same -> returns false
@@ -81,8 +81,8 @@ public class ApplicationTest {
         editedAlice = new ApplicationBuilder(ALICE).withApplicationDate(VALID_APPLICATION_DATE_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
-        // different address -> returns false
-        editedAlice = new ApplicationBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).build();
+        // different url -> returns false
+        editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different tags -> returns false
@@ -94,7 +94,7 @@ public class ApplicationTest {
     public void toStringMethod() {
         String expected = Application.class.getCanonicalName() + "{company=" + ALICE.getCompany()
                 + ", role=" + ALICE.getRole()
-                + ", applicationDate=" + ALICE.getApplicationDate() + ", address=" + ALICE.getAddress()
+                + ", applicationDate=" + ALICE.getApplicationDate() + ", url=" + ALICE.getUrl()
                 + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }

@@ -42,8 +42,8 @@ public class Messages {
                 .append(application.getRole())
                 .append("; Application Date: ")
                 .append(application.getApplicationDate())
-                .append("; Address: ")
-                .append(application.getAddress())
+                .append("; URL: ")
+                .append(application.getUrl().map(u -> u.value).orElse("-"))
                 .append("; Tags: ");
         application.getTags().forEach(builder::append);
         return builder.toString();

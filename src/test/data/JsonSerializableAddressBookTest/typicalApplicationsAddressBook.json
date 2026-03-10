@@ -4,43 +4,43 @@
     "company" : "Accenture",
     "role" : "Software Engineer",
     "applicationDate" : "2026-01-01",
-    "address" : "123, Jurong West Ave 6, #08-111",
+    "url" : "http://alice.example.com",
     "tags" : [ "friends" ]
   }, {
     "company" : "Meta",
     "role" : "Data Analyst",
     "applicationDate" : "2026-01-02",
-    "address" : "311, Clementi Ave 2, #02-25",
+    "url" : "http://benson.example.com",
     "tags" : [ "owesMoney", "friends" ]
   }, {
     "company" : "Google",
     "role" : "Mobile Developer",
     "applicationDate" : "2026-01-03",
-    "address" : "wall street",
+    "url" : "http://carl.example.com",
     "tags" : [ ]
   }, {
     "company" : "Dyson",
     "role" : "Backend Developer",
     "applicationDate" : "2026-01-04",
-    "address" : "10th street",
+    "url" : "http://daniel.example.com",
     "tags" : [ "friends" ]
   }, {
     "company" : "Tencent",
     "role" : "UX Designer",
     "applicationDate" : "2026-01-05",
-    "address" : "michegan ave",
+    "url" : "http://elle.example.com",
     "tags" : [ ]
   }, {
     "company" : "Foodpanda",
     "role" : "Frontend Developer",
     "applicationDate" : "2026-01-06",
-    "address" : "little tokyo",
+    "url" : "http://fiona.example.com",
     "tags" : [ ]
   }, {
     "company" : "Grab",
     "role" : "DevOps Engineer",
     "applicationDate" : "2026-01-07",
-    "address" : "4th street",
+    "url" : "http://george.example.com",
     "tags" : [ ]
   } ]
 }

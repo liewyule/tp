@@ -3,8 +3,8 @@ package seedu.address.model.application;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_BOB;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.ALICE;
 import static seedu.address.testutil.TypicalApplications.BOB;
@@ -42,7 +42,7 @@ public class UniqueApplicationListTest {
     @Test
     public void contains_applicationWithSameIdentityFieldsInList_returnsTrue() {
         uniqueApplicationList.add(ALICE);
-        Application editedAlice = new ApplicationBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BOB)
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueApplicationList.contains(editedAlice));
@@ -86,7 +86,7 @@ public class UniqueApplicationListTest {
     @Test
     public void setApplication_editedApplicationHasSameIdentity_success() {
         uniqueApplicationList.add(ALICE);
-        Application editedAlice = new ApplicationBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
+        Application editedAlice = new ApplicationBuilder(ALICE).withUrl(VALID_URL_BOB)
                 .withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueApplicationList.setApplication(ALICE, editedAlice);

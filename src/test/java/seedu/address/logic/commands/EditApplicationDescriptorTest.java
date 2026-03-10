@@ -5,16 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_APPLICATION_DATE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_COMPANY_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ROLE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_URL_BOB;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.EditCommand.EditApplicationDescriptor;
 import seedu.address.testutil.EditApplicationDescriptorBuilder;
+
 
 public class EditApplicationDescriptorTest {
 
@@ -50,8 +51,8 @@ public class EditApplicationDescriptorTest {
                 .withApplicationDate(VALID_APPLICATION_DATE_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different address -> returns false
-        editedAmy = new EditApplicationDescriptorBuilder(DESC_AMY).withAddress(VALID_ADDRESS_BOB).build();
+        // different url -> returns false
+        editedAmy = new EditApplicationDescriptorBuilder(DESC_AMY).withUrl(VALID_URL_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different tags -> returns false
@@ -65,8 +66,8 @@ public class EditApplicationDescriptorTest {
         String expected = EditApplicationDescriptor.class.getCanonicalName() + "{company="
                 + editApplicationDescriptor.getCompany().orElse(null) + ", role="
                 + editApplicationDescriptor.getRole().orElse(null) + ", applicationDate="
-                + editApplicationDescriptor.getApplicationDate().orElse(null) + ", address="
-                + editApplicationDescriptor.getAddress().orElse(null) + ", tags="
+                + editApplicationDescriptor.getApplicationDate().orElse(null) + ", url="
+                + editApplicationDescriptor.getUrl().orElse(null) + ", tags="
                 + editApplicationDescriptor.getTags().orElse(null) + "}";
         assertEquals(expected, editApplicationDescriptor.toString());
     }
