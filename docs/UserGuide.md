@@ -79,6 +79,10 @@ Adds an application to LockedIn.
 
 Format: `add n/COMPANY r/ROLE d/APPLICATION_DATE [u/URL] [s/STATUS]`
 
+* `COMPANY` and `ROLE` should contain only alphanumeric characters and spaces, and should not be blank.
+* `APPLICATION_DATE` should be a valid date in the format `yyyy-MM-dd`.
+* `URL`, if provided, must start with `http://` or `https://`.
+
 <box type="tip" seamless>
 
 **Tip:** If `s/STATUS` is omitted, the application status defaults to `Applied`.
@@ -103,6 +107,9 @@ Format: `edit INDEX [n/COMPANY] [r/ROLE] [d/APPLICATION_DATE] [u/URL] [s/STATUS]
 * Edits the application at the specified `INDEX`. The index refers to the index number shown in the displayed application list. The index **must be a positive integer** 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* `COMPANY` and `ROLE` should contain only alphanumeric characters and spaces, and should not be blank.
+* `APPLICATION_DATE` should be a valid date in the format `yyyy-MM-dd`.
+* `URL`, if provided, must start with `http://` or `https://`.
 
 Examples:
 * `edit 1 r/Software Engineer d/2025-03-10` Edits the role and application date of the 1st application.
@@ -144,6 +151,7 @@ Finds applications whose company names contain any of the given keywords.
 
 Format: `find KEYWORD [MORE_KEYWORDS]`
 
+* At least one keyword must be provided.
 * The search is case-insensitive. e.g `google` will match `Google`
 * The order of the keywords does not matter. e.g. `Google Meta` will match `Meta Google`
 * Only the company name is searched.
