@@ -10,27 +10,49 @@
 <?import javafx.scene.layout.VBox?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
-  <GridPane HBox.hgrow="ALWAYS">
+  <GridPane HBox.hgrow="ALWAYS" hgap="20" >
+    <padding>
+      <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
     <columnConstraints>
-      <ColumnConstraints hgrow="SOMETIMES" minWidth="10" prefWidth="150" />
+      <ColumnConstraints prefWidth="40"/>   <!-- ID -->
+      <ColumnConstraints prefWidth="100"/>  <!-- Company -->
+      <ColumnConstraints prefWidth="200"/>  <!-- Role -->
+      <ColumnConstraints prefWidth="80"/>  <!-- Status -->
+      <ColumnConstraints prefWidth="100"/>  <!-- Date -->
+      <ColumnConstraints prefWidth="80"/>   <!-- URL -->
     </columnConstraints>
-    <VBox alignment="CENTER_LEFT" minHeight="105" GridPane.columnIndex="0">
-      <padding>
-        <Insets top="5" right="5" bottom="5" left="15" />
-      </padding>
-      <HBox spacing="0.5" alignment="CENTER_LEFT">
-        <Label fx:id="id" styleClass="cell_big_label">
-          <minWidth>
-            <!-- Ensures that the label text is never truncated -->
-            <Region fx:constant="USE_PREF_SIZE" />
-          </minWidth>
-        </Label>
-        <Label fx:id="company" text="\$first" styleClass="cell_big_label" />
-      </HBox>
-      <FlowPane fx:id="tags" id="tags" />
-      <Label fx:id="phone" styleClass="cell_small_label" text="\$phone" />
-      <Label fx:id="url" styleClass="cell_small_label" text="\$url" />
-      <Label fx:id="applicationDate" styleClass="cell_small_label" text="\$applicationDate" />
-    </VBox>
+
+    <!-- ID -->
+    <Label fx:id="id"
+           GridPane.columnIndex="0"
+           styleClass="cell_big_label"/>
+
+    <!-- Company -->
+    <Label fx:id="company"
+           GridPane.columnIndex="1"
+           styleClass="cell_big_label"
+           wrapText="true"/>
+
+    <!-- Role -->
+    <Label fx:id="role"
+           GridPane.columnIndex="2"
+           styleClass="cell_big_label"
+           wrapText="true"/>
+
+    <!-- Status -->
+    <Label fx:id="status"
+           GridPane.columnIndex="3"
+           styleClass="cell_big_label"/>
+
+    <!-- Date -->
+    <Label fx:id="applicationDate"
+           GridPane.columnIndex="4"
+           styleClass="cell_small_label"/>
+
+    <!-- URL -->
+    <Label fx:id="url"
+           GridPane.columnIndex="5"
+           styleClass="cell_small_label"/>
   </GridPane>
 </HBox>

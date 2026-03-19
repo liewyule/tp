@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.application.Application;
@@ -31,13 +30,13 @@ public class ApplicationCard extends UiPart<Region> {
     @FXML
     private Label id;
     @FXML
-    private Label phone;
+    private Label role;
+    @FXML
+    private Label status;
     @FXML
     private Label url;
     @FXML
     private Label applicationDate;
-    @FXML
-    private FlowPane tags;
 
     /**
      * Creates a {@code ApplicationCard} with the given {@code Application} and index to display.
@@ -47,9 +46,9 @@ public class ApplicationCard extends UiPart<Region> {
         this.application = application;
         id.setText(displayedIndex + ". ");
         company.setText(application.getCompany().value);
-        phone.setText(application.getRole().value);
+        role.setText(application.getRole().value);
+        status.setText(application.getStatus().toString());
         url.setText(application.getUrl().map(u -> u.value).orElse("url: -"));
         applicationDate.setText(application.getApplicationDate().value);
-        tags.getChildren().add(new Label(application.getStatus().toString()));
     }
 }
