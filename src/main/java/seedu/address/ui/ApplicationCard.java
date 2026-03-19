@@ -55,7 +55,7 @@ public class ApplicationCard extends UiPart<Region> {
         status.getStyleClass().add(statusClass);
     }
 
-    private static String getStatusStyleClass(Application application) {
+    static String getStatusStyleClass(Application application) {
         return "status-" + application.getStatus().toString().toLowerCase();
     }
 }
