@@ -51,6 +51,50 @@ public class ApplicationCardTest {
         assertTrue(statusLabel.getStyleClass().contains("status-oa"));
     }
 
+    @Test
+    public void constructor_interviewStatus_addsInterviewStyleClass() throws Exception {
+        Application application = new ApplicationBuilder().withStatus("Interview").build();
+
+        ApplicationCard card = createCardOnFxThread(application);
+        Label statusLabel = getStatusLabel(card);
+
+        assertEquals("Interview", statusLabel.getText());
+        assertTrue(statusLabel.getStyleClass().contains("status-interview"));
+    }
+
+    @Test
+    public void constructor_offeredStatus_addsOfferedStyleClass() throws Exception {
+        Application application = new ApplicationBuilder().withStatus("Offered").build();
+
+        ApplicationCard card = createCardOnFxThread(application);
+        Label statusLabel = getStatusLabel(card);
+
+        assertEquals("Offered", statusLabel.getText());
+        assertTrue(statusLabel.getStyleClass().contains("status-offered"));
+    }
+
+    @Test
+    public void constructor_rejectedStatus_addsRejectedStyleClass() throws Exception {
+        Application application = new ApplicationBuilder().withStatus("Rejected").build();
+
+        ApplicationCard card = createCardOnFxThread(application);
+        Label statusLabel = getStatusLabel(card);
+
+        assertEquals("Rejected", statusLabel.getText());
+        assertTrue(statusLabel.getStyleClass().contains("status-rejected"));
+    }
+
+    @Test
+    public void constructor_withdrawnStatus_addsWithdrawnStyleClass() throws Exception {
+        Application application = new ApplicationBuilder().withStatus("Withdrawn").build();
+
+        ApplicationCard card = createCardOnFxThread(application);
+        Label statusLabel = getStatusLabel(card);
+
+        assertEquals("Withdrawn", statusLabel.getText());
+        assertTrue(statusLabel.getStyleClass().contains("status-withdrawn"));
+    }
+
     private static ApplicationCard createCardOnFxThread(Application application) throws Exception {
         final ApplicationCard[] holder = new ApplicationCard[1];
         CountDownLatch latch = new CountDownLatch(1);
@@ -68,4 +112,3 @@ public class ApplicationCardTest {
         return (Label) statusField.get(card);
     }
 }
-
