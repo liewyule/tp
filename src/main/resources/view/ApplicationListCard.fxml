@@ -17,10 +17,10 @@
     <columnConstraints>
       <ColumnConstraints prefWidth="40"/>   <!-- ID -->
       <ColumnConstraints prefWidth="100"/>  <!-- Company -->
-      <ColumnConstraints prefWidth="200"/>  <!-- Role -->
+      <ColumnConstraints prefWidth="175"/>  <!-- Role -->
       <ColumnConstraints prefWidth="100"/>  <!-- Status -->
       <ColumnConstraints prefWidth="100"/>  <!-- Date -->
-      <ColumnConstraints prefWidth="80"/>   <!-- URL -->
+      <ColumnConstraints prefWidth="200"/>   <!-- URL -->
     </columnConstraints>
 
     <!-- ID -->
@@ -53,6 +53,7 @@
     <!-- URL -->
     <Label fx:id="url"
            GridPane.columnIndex="5"
-           styleClass="cell_small_label"/>
+           styleClass="cell_small_label"
+           wrapText="true"/>
   </GridPane>
 </HBox>
