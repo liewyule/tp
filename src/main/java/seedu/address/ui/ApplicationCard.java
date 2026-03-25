@@ -83,7 +83,7 @@ public class ApplicationCard extends UiPart<Region> {
      */
     private void updateColumnConstraints(double width) {
         cardGridPane.getColumnConstraints().clear();
-        
+
         if (width < WIDTH_THRESHOLD) {
             cardGridPane.getColumnConstraints().addAll(
                 createFixedColumn(40),

@@ -61,7 +61,7 @@ public class ApplicationListPanel extends UiPart<Region> {
      */
     private void updateColumnConstraints(double width) {
         headerGridPane.getColumnConstraints().clear();
-        
+
         if (width < WIDTH_THRESHOLD) {
             headerGridPane.getColumnConstraints().addAll(
                 createFixedColumn(40),
