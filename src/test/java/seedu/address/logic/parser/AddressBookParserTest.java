@@ -20,6 +20,7 @@ import seedu.address.logic.commands.AliasCommand;
 import seedu.address.logic.commands.AliasListCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.commands.DropCommand;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditApplicationDescriptor;
 import seedu.address.logic.commands.ExitCommand;
@@ -56,6 +57,16 @@ public class AddressBookParserTest {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_APPLICATION.getOneBased());
         assertEquals(new DeleteCommand(INDEX_FIRST_APPLICATION), command);
+    }
+
+    @Test
+    public void parseCommand_drop() throws Exception {
+        assertEquals(new DropCommand(), parser.parseCommand(DropCommand.COMMAND_WORD));
+    }
+
+    @Test
+    public void parseCommand_dropWithArgs_returnsDropCommand() throws Exception {
+        assertEquals(new DropCommand(), parser.parseCommand(DropCommand.COMMAND_WORD + " 1"));
     }
 
     @Test
