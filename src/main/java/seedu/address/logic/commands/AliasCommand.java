@@ -40,7 +40,8 @@ public class AliasCommand extends Command {
             CopyCommand.COMMAND_WORD,
             COMMAND_WORD,
             UnaliasCommand.COMMAND_WORD,
-            AliasListCommand.COMMAND_WORD
+            AliasListCommand.COMMAND_WORD,
+            DropCommand.COMMAND_WORD
     );
 
     private final String alias;
