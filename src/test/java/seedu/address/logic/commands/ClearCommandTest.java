@@ -14,7 +14,7 @@ public class ClearCommandTest {
     public void execute_emptyAddressBook_success() {
         Model model = new ModelManager();
         CommandResult result = new ClearCommand().execute(model);
-        
+
         assert result.getFeedbackToUser().contains("Cleared 0 application(s)");
         assert model.getFilteredApplicationList().isEmpty();
     }
@@ -23,9 +23,9 @@ public class ClearCommandTest {
     public void execute_nonEmptyAddressBook_success() {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         int initialSize = model.getFilteredApplicationList().size();
-        
+
         CommandResult result = new ClearCommand().execute(model);
-        
+
         assert result.getFeedbackToUser().contains("Cleared " + initialSize + " application(s)");
         assert model.getFilteredApplicationList().isEmpty();
     }
