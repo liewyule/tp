@@ -87,11 +87,12 @@ public class Application {
 
         return otherApplication != null
                 && otherApplication.getCompany().value.equalsIgnoreCase(getCompany().value)
-                && otherApplication.getRole().value.equalsIgnoreCase(getRole().value);
+                && otherApplication.getRole().value.equalsIgnoreCase(getRole().value)
+                && applicationDate.equals(otherApplication.applicationDate);
     }
 
     /**
-     * Returns true if both applications have the same company, role, and application date (case-insensitive for company and role).
+     * Returns true if both applications have the same identity and data fields.
      * This defines a stronger notion of equality than {@link #isSameApplication(Application)}.
      */
     @Override
@@ -108,7 +109,10 @@ public class Application {
         Application otherApplication = (Application) other;
         return company.value.equalsIgnoreCase(otherApplication.company.value)
                 && role.value.equalsIgnoreCase(otherApplication.role.value)
-                && applicationDate.equals(otherApplication.applicationDate);
+                && applicationDate.equals(otherApplication.applicationDate)
+                && url.equals(otherApplication.url)
+                && status.equals(otherApplication.status)
+                && note.equals(otherApplication.note);
     }
 
     @Override
