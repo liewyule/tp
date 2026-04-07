@@ -32,6 +32,8 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalApplications.AMY;
 import static seedu.address.testutil.TypicalApplications.BOB;
 
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.Messages;
@@ -145,9 +147,17 @@ public class AddCommandParserTest {
         assertParseSuccess(parser,
                 COMPANY_DESC_AMAZON + ROLE_DESC_AMAZON + APPLICATION_DATE_DESC_AMAZON + URL_DESC_AMAZON,
                 new AddCommand(expectedApplication));
+
+        // missing application date -> defaults to current date
+        expectedApplication = new ApplicationBuilder()
+                .withCompany("Amazon")
+                .withRole("Software Engineer Intern")
+                .withApplicationDate(LocalDate.now())
+                .build();
+        assertParseSuccess(parser,
+                COMPANY_DESC_AMAZON + ROLE_DESC_AMAZON,
+                new AddCommand(expectedApplication));
     }
-
-
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
@@ -160,11 +170,6 @@ public class AddCommandParserTest {
         // missing role prefix
         assertParseFailure(parser, COMPANY_DESC_BYTEDANCE + VALID_ROLE_BYTEDANCE + APPLICATION_DATE_DESC_BYTEDANCE,
                 expectedMessage);
-
-        // missing application date prefix
-        assertParseFailure(parser, COMPANY_DESC_BYTEDANCE + ROLE_DESC_BYTEDANCE + VALID_APPLICATION_DATE_BYTEDANCE,
-                expectedMessage);
-
 
         // all prefixes missing
         assertParseFailure(parser, VALID_COMPANY_BYTEDANCE + VALID_ROLE_BYTEDANCE + VALID_APPLICATION_DATE_BYTEDANCE,

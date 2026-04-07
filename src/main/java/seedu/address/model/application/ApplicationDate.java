@@ -19,6 +19,13 @@ public class ApplicationDate {
     private final LocalDate value;
 
     /**
+     * Constructs an {@code ApplicationDate} using the current date.
+     */
+    public ApplicationDate() {
+        value = LocalDate.now();
+    }
+
+    /**
      * Constructs an {@code ApplicationDate} from a valid date string.
      *
      * @param applicationDate A valid application date in yyyy-MM-dd format.

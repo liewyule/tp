@@ -23,6 +23,12 @@ public class ApplicationDateTest {
     }
 
     @Test
+    public void constructor_noArguments_setsCurrentDate() {
+        ApplicationDate applicationDate = new ApplicationDate();
+        assertEquals(LocalDate.now(), applicationDate.getValue());
+    }
+
+    @Test
     public void constructor_localDate_storesDateCorrectly() {
         LocalDate date = LocalDate.of(2026, 3, 9);
         ApplicationDate applicationDate = new ApplicationDate(date);
