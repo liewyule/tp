@@ -218,13 +218,13 @@ LockedIn stores free-form notes in the immutable `Application` entity through th
 
 Behavior:
 
-* `note INDEX n/TEXT` replaces the note for the target application.
+* `note INDEX NOTE` replaces the note for the target application.
 * `clearnote INDEX` resets the note to `Note.EMPTY`.
 * Both commands use index-based lookup against the filtered list and persist updates through `Model#setApplication(...)`.
 
 Validation:
 
-* `NoteCommandParser` enforces exactly one `n/` prefix and rejects empty note text.
+* `NoteCommandParser` parses `note INDEX NOTE` and rejects empty note text.
 * `ClearNoteCommandParser` only accepts a single index argument.
 
 ### Auto-save behavior and error handling
@@ -956,10 +956,10 @@ testers are expected to do more *exploratory* testing.
 
     1. Prerequisites: At least one application exists.
 
-    2. Test case: `note 1 n/Prepare for OA this weekend.`  
+    2. Test case: `note 1 Prepare for OA this weekend.`  
        Expected: Note field for the first application is updated.
 
-    3. Test case: `note 1 n/`  
+    3. Test case: `note 1`  
        Expected: No note is saved. An error message is shown.
 
 2. Clearing notes (`clearnote`)
