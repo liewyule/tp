@@ -122,4 +122,30 @@ public class ApplicationTest {
         Application offeredApp = new ApplicationBuilder(ALICE).withStatus("Offered").build();
         assertFalse(offeredApp.hasTerminalStatus());
     }
+
+    @Test
+    public void hashCode_caseInsensitiveCompanyAndRole_sameHashCode() {
+        Application baseline = new ApplicationBuilder(ALICE)
+                .withCompany("Google")
+                .withRole("Software Engineer Intern")
+                .build();
+        Application sameValuesDifferentCase = new ApplicationBuilder(ALICE)
+                .withCompany("gOoGlE")
+                .withRole("sOfTwArE eNgInEeR iNtErN")
+                .build();
+
+        assertTrue(baseline.equals(sameValuesDifferentCase));
+        assertEquals(baseline.hashCode(), sameValuesDifferentCase.hashCode());
+    }
+
+    @Test
+    public void hashCode_differentDate_differentHashCode() {
+        Application firstApplication = new ApplicationBuilder(ALICE).build();
+        Application secondApplication = new ApplicationBuilder(ALICE)
+                .withApplicationDate(VALID_APPLICATION_DATE_BYTEDANCE)
+                .build();
+
+        assertFalse(firstApplication.equals(secondApplication));
+        assertFalse(firstApplication.hashCode() == secondApplication.hashCode());
+    }
 }
