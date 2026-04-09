@@ -778,10 +778,11 @@ A: Install LockedIn on the other computer and replace the empty data file it cre
 | **Delete**     | `delete INDEX`                                                         | `delete 3`                                                                                    |
 | **Drop**       | `drop`                                                                 | `drop`                                                                                        |
 | **Edit**       | `edit INDEX [n/COMPANY] [r/ROLE] [d/APPLICATION_DATE] [u/URL] [s/STATUS]` | `edit 2 n/OpenAI s/Offered`                                                                   |
+| **Exit**       | `exit`                                                                 | `exit`      
 | **Find**       | `find [n/COMPANY_NAME] [r/ROLE] [d/APPLICATION_DATE] [s/STATUS]`       | `find n/Google r/Intern`                                                                      |
 | **Help**       | `help`                                                                 | `help`                                                                                        |
 | **List**       | `list`                                                                 | `list`                                                                                        |
 | **Next**       | `next INDEX`                                                           | `next 3`                                                                                      |
 | **Note**       | `note INDEX NOTE`                                                      | `note 1 Interview at Sunday`                                                                  |
 | **Unalias**    | `unalias ALIAS`                                                        | `unalias ls`                                                                                  |
-| **Exit**       | `exit`                                                                 | `exit`                                                                                        |
+                                                                                  |
