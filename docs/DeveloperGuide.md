@@ -209,7 +209,7 @@ Implementation details:
 * Matching entries are deleted through `Model#deleteApplication(...)`.
 * If no terminal entries are present in the current list, the command fails with a descriptive error.
 
-<puml src="diagrams/DropActivityDiagram.puml" alt="Activity flow for drop command" width="420" />
+<puml src="diagrams/DropActivityDiagram.puml" alt="Activity flow for drop command" width="300"  />
 
 The sequence diagram below shows the internal `Logic` and `Model` interactions when `drop` is executed:
 
@@ -442,6 +442,7 @@ Status:
 
       Use case ends.
 
+
 **Use case: Delete an application record**
 
 **Preconditions:**
@@ -463,6 +464,7 @@ Status:
     * 2a1. LockedIn shows an error message indicating the specified index is invalid.
 
       Use case ends.
+
 
 **Use case: List all applications**
 
@@ -520,6 +522,7 @@ Status:
     * 3a1. LockedIn shows an empty filtered list.
 
       Use case ends.
+
 
 **Use case: Edit an application**
 
@@ -592,6 +595,7 @@ Status:
       Use case ends.
 
 
+
 **Use case: Copy job URL**
 
 **Preconditions:**
@@ -619,6 +623,8 @@ Status:
     * 2b1. LockedIn shows an error message indicating that there is no URL to copy.
 
       Use case ends.
+
+
 
 **Use case: Advance application status**
 
@@ -665,6 +671,7 @@ Status:
       Use case ends.
 
 
+
 **Use case: Set a note for an application**
 
 **Preconditions:**
@@ -700,6 +707,7 @@ Status:
       Use case ends.
 
 
+
 **Use case: Clear a note from an application**
 
 **Preconditions:**
@@ -727,6 +735,7 @@ Status:
     * 2b1. LockedIn shows a message indicating the note field is already empty.
 
       Use case ends.
+
 
 
 **Use case: Create an alias for a command word**
@@ -768,6 +777,7 @@ Status:
       Use case ends.
 
 
+
 **Use case: Remove an existing alias**
 
 **Preconditions:**
@@ -795,6 +805,7 @@ Status:
     * 2b1. LockedIn shows an error message indicating that the alias does not exist.
 
       Use case ends.
+
 
 
 **Use case: View all saved aliases**
