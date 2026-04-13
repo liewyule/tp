@@ -244,6 +244,7 @@ Adds a new application to LockedIn.
 * `APPLICATION_DATE` must be a valid date in the format `yyyy-MM-dd`.
 * If `d/APPLICATION_DATE` is omitted, LockedIn uses the current date by default.
 * `URL`, if provided, must start with `http://` or `https://`.
+* Status input is case-insensitive. For example, `s/applied`, `s/Applied`, and `s/APPLIED` are all accepted.
 * If `s/STATUS` is omitted, LockedIn uses `Applied` by default.
 * Duplicate applications have the same company, role, and application date. LockedIn rejects duplicate applications.
 
@@ -286,6 +287,7 @@ Edits an existing application in LockedIn.
 * `ROLE` must be at most 100 characters long.
 * `APPLICATION_DATE` must be a valid date in the format `yyyy-MM-dd`.
 * `URL`, if provided, must start with `http://` or `https://`.
+* Status input is case-insensitive. For example, `s/offered`, `s/Offered`, and `s/OFFERED` are all accepted.
 * If the edited values make the application a duplicate of an existing one, the edit is rejected.
 
 **Examples**
@@ -357,6 +359,7 @@ For date fields, it can either find exact dates or find dates within a range (in
 * You cannot provide an empty parameter. A prefix must be followed by at least one keyword (e.g. `find c/` is invalid).
 * The search is case-insensitive.
   Example: `c/google` matches `Google`.
+* Status keywords are also case-insensitive. For example, `find s/applied` and `find s/APPLIED` are both valid.
 * For company, role, URL, and status, applications matching at least one keyword in the same field are returned.
 * If multiple fields are specified, applications must match all those fields.
 * `d/START_DATE:END_DATE` returns applications whose application dates fall within the range, inclusive.
@@ -892,3 +895,4 @@ Manually restore the minimized Help window.
 | **Next**       | `next INDEX`                                                              | `next 3`                                               |
 | **Note**       | `note INDEX NOTE`                                                         | `note 1 OA deadline is 2025-03-15`                     |
 | **Unalias**    | `unalias ALIAS`                                                           | `unalias ls`                                           |
+

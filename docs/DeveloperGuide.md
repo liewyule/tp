@@ -413,6 +413,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
        Use case ends.
 
+* 2g. The provided company name or role name contains unsupported characters.
+
+    * 2g1. LockedIn shows an error message indicating that the company name or role name contains unsupported characters.
+
+      Use case ends.
+
+* 2h. The provided company name or role name exceeds the maximum allowed length of 100 characters.
+
+    * 2h1. LockedIn shows an error message indicating that the company name or role name is too long.
+
+      Use case ends.
+
 **Use case: Delete an application record**
 
 **Preconditions:**
@@ -547,6 +559,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * 2g. The user provides an unsupported or invalid prefix.
 
     * 2g1. LockedIn shows an error message indicating that the command format is invalid.
+
+      Use case ends.
+
+* 2h. The provided company name or role name contains unsupported characters.
+
+    * 2h1. LockedIn shows an error message indicating that the company name or role name contains unsupported characters.
+
+      Use case ends.
+
+* 2i. The provided company name or role name exceeds the maximum allowed length of 100 characters.
+
+    * 2i1. LockedIn shows an error message indicating that the company name or role name is too long.
 
       Use case ends.
 
