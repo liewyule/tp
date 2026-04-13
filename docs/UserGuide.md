@@ -361,10 +361,13 @@ For date fields, it can either find exact dates or find dates within a range (in
 * The search is case-insensitive.
   Example: `c/google` matches `Google`.
 * Status keywords are also case-insensitive. For example, `find s/applied` and `find s/APPLIED` are both valid.
-* For company, role, URL, and status, applications matching at least one keyword in the same field are returned.
+* For company, role, URL, and status, if multiple keywords are provided in the same field, applications matching any one of those keywords in that field will be returned.
+   Example: `find s/applied interview` returns applications with status `Applied` or `Interview`.
 * For URL fields, the keyword must match exactly as stored, including characters such as trailing slashes (`/`). For example, `https://www.example.com` does not match `https://www.example.com/`.
 * If multiple fields are specified, applications must match all those fields.
 * `d/START_DATE:END_DATE` returns applications whose application dates fall within the range, inclusive.
+* For date ranges, spaces are allowed before or after the whole date range, but not around the colon (:).
+  Example: `find d/ 2020-01-01:2023-01-01` is valid, but `find d/2020-01-01 : 2023-01-01` is invalid.
 * `START_DATE` must be earlier than or equal to `END_DATE`.
 * All dates must be valid and must follow the format `yyyy-MM-dd`.
 
