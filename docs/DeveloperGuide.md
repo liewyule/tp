@@ -110,7 +110,7 @@ How the `Logic` component works:
 
 1. When `Logic` is called upon to execute a command, it is passed to an `AddressBookParser` object which in turn creates a parser that matches the command (e.g., `DeleteCommandParser`) and uses it to parse the command.
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
-1. The command can communicate with the `Model` when it is executed (e.g. to delete an application).<br>
+1. The command can communicate with the `Model` when it is executed (e.g., to delete an application).<br>
    Note that although this is shown as a single step in the diagram above (for simplicity), in the code it can take several interactions (between the command object and the `Model`) to achieve.
 1. The result of the command execution is encapsulated as a `CommandResult` object which is returned back from `Logic`.
 
@@ -120,7 +120,7 @@ Here are the other classes in `Logic` (omitted from the class diagram above) tha
 
 How the parsing works:
 * When called upon to parse a user command, the `AddressBookParser` class creates an `XYZCommandParser` (`XYZ` is a placeholder for the specific command name e.g., `AddCommandParser`) which uses the other classes shown above to parse the user command and create a `XYZCommand` object (e.g., `AddCommand`) which the `AddressBookParser` returns back as a `Command` object.
-* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible e.g, during testing.
+* All `XYZCommandParser` classes (e.g., `AddCommandParser`, `DeleteCommandParser`, ...) inherit from the `Parser` interface so that they can be treated similarly where possible (e.g., during testing).
 
 ### Model component
 **API** : [`Model.java`](https://github.com/AY2526S2-CS2103T-W12-2/tp/blob/master/src/main/java/seedu/address/model/Model.java)
@@ -162,12 +162,17 @@ This section describes some noteworthy details on how certain features are imple
 
 Alias support is implemented through a collaboration between `AddressBookParser`, `Model`, and `UserPrefs`:
 
-1. `AddressBookParser#parseCommand` extracts the command word and checks whether it exists in the alias map.
-1. If a mapping exists, the alias is rewritten to the corresponding built-in command word before dispatch.
-1. `AliasCommand` validates that the target command is supported and the alias itself is not a built-in command.
-1. Valid mappings are persisted via `Model#setAlias(...)`, which writes to `UserPrefs`.
-1. `UnaliasCommand` removes a mapping via `Model#removeAlias(...)`.
-1. `AliasListCommand` renders all current mappings in alphabetical order.
+1. `AddressBookParser#parseCommand` first performs an initial split of the raw user input into:
+    * the first token (`commandWord`)
+    * the remaining text (`arguments`)
+2. It then checks whether `commandWord` exists in the alias map.
+3. If a mapping exists, only the extracted `commandWord` is rewritten to the corresponding built-in command word.
+4. The rewritten command word is then dispatched to the matching built-in command parser.
+5. Command-specific parsing of `arguments` (such as prefix detection and argument tokenization) happens only after this dispatch, inside the selected parser.
+6. `AliasCommand` validates that the target command is supported and the alias itself is not a built-in command.
+7. Valid mappings are persisted via `Model#setAlias(...)`, which writes to `UserPrefs`.
+8. `UnaliasCommand` removes a mapping via `Model#removeAlias(...)`.
+9. `AliasListCommand` renders all current mappings in alphabetical order.
 
 <puml src="diagrams/AliasSequenceDiagram.puml" alt="Interactions inside Logic and Model for alias creation" />
 
@@ -240,17 +245,18 @@ Design note: The command requires a URL to be present; applications without a UR
 
 ### Find feature (`find`)
 
-`find` filters the displayed application list using one or more of the following prefixes: `n/COMPANY`, `r/ROLE`, `d/DATE`, `s/STATUS`. At least one prefix must be provided.
+`find` filters the displayed application list using one or more of the following prefixes: `n/COMPANY`, `r/ROLE`, `d/DATE_OR_DATE_RANGE`, `u/URL`, `s/STATUS`. At least one prefix must be provided.
 
 Implementation flow:
 
 1. `FindCommandParser` tokenizes the input using `ArgumentTokenizer`, validates that at least one recognized prefix is present, and rejects invalid `Status` values early.
-1. It constructs an `ApplicationContainsKeywordsPredicate` with separate keyword lists per field.
+1. It constructs an `ApplicationContainsKeywordsPredicate` with separate keyword lists per field (including parsing exact dates and date ranges).
 1. `FindCommand` calls `Model#updateFilteredApplicationList(predicate)` to apply the filter.
 
 Predicate logic (`ApplicationContainsKeywordsPredicate`):
 * Keywords within the same field are matched with **OR** logic (any keyword match passes).
 * Different fields are combined with **AND** logic (all provided fields must match).
+* For dates, an application must fall exactly on the given date, or inclusively within the provided date range (`START_DATE:END_DATE`).
 
 <puml src="diagrams/FindSequenceDiagram.puml" alt="Interactions inside Logic and Model for find command" />
 
@@ -324,40 +330,49 @@ in a CLI environment. It allows target users to log application updates, record 
 
 ### User stories
 
-Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
+Priorities:
+High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unlikely to have) - `*`
 
-| Priority | As a …​         | I want to …​                                      | So that I can…​                                         |
-|----------|-----------------|---------------------------------------------------|---------------------------------------------------------|
-| `* * *`  | first time user | add an application record                         | track my application                                    |
-| `* * *`  | first time user | view all applications in a list                   | see all my applications                                 |
-| `* * *`  | first time user | delete application records                        | remove companies I am no longer interested in           |
-| `* * *`  | first time user | edit an application's details                     | correct mistakes I made                                 |
-| `* * *`  | user            | update an application status                      | track the progress of my application                    |
-| `* * *`  | user            | save the application date for each application    | track my applications efficiently                       |
-| `* * *`  | user            | save data on my hard disk                         | access my records locally                               |
-| `* * *`  | user            | add a application URL to an entry                 | have a reference to the original application page       |
-| `* * `   | user            | copy an application URL                           | quickly open the link in my browser without retyping it |
-| `* * `   | user            | add notes to an application                       | store reminders or interview details                    |
-| `* *`    | user            | filter the list by status                         | see only my active applications                         |
-| `* *`    | user            | filter applications by company name and role      | find relevant applications quickly                      |
-| `* *`    | user            | filter applications by application date           | find applications submitted during a specific period quickly                      |
-| `* *`    | user            | filter applications by URL                        | find applications linked to a specific job posting quickly |
-| `* *`    | user             | remove rejected or withdrawn applications quickly | keep my application list clean         |
-| `* *`    | user            | view total number of applications by status       | track my overall progress                               |
-| `* *`    | expert user     | use short aliases                                 | type commands faster                                    |
-| `* *`    | expert user      | remove aliases                              | stop using shortcuts I no longer need               | Add |
-| `* *`    | expert user      | view all saved aliases                      | remember what shortcuts I created                   |
-| `* *`    | expert user     | cycle through previous commands                   | reuse previously typed commands                         |
-| `* *`    | user            | view the potential pay of each position           | know which applications result in higher pay            |
-| `* *`    | user            | filter the list by pay range                      | determine expected salary levels                        |
-| `*`      | user            | favourite companies                               | track companies I am particularly interested in         |
-| `*`      | first time user | see dummy data                                    | understand how the data is structured                   |
-| `*`      | expert user     | use tab completion                                | avoid typing full commands                              |
-| `*`      | user            | pin the application window on top                 | keep the logbook visible while browsing job portals     |
-| `*`      | user            | undo a command                                    | recover from accidental deletions                       |
-| `*`      | expert user     | export data into another file format              | keep backups or reuse data elsewhere                    |
-| `*`      | expert user     | add tags to companies                             | record additional information about companies           |
+Status:
+* `✓` — implemented in the current version
+* `○` — planned for a future version
 
+| Priority | As a …​         | I want to …​                                                | So that I can…​                                               | Status |
+|----------|-----------------|-------------------------------------------------------------|---------------------------------------------------------------|--------|
+| `* * *`  | first-time user | add an application record                                   | track my internship applications                              | `✓` |
+| `* * *`  | first-time user | view all applications in a list                             | see all my applications at a glance                           | `✓` |
+| `* * *`  | user            | edit an application's details                               | correct mistakes I made                                       | `✓` |
+| `* * *`  | user            | delete an application record                                | remove applications I no longer want to track                 | `✓` |
+| `* * *`  | user            | update an application's status                              | track the progress of each application                        | `✓` |
+| `* * *`  | user            | save data automatically on my hard disk                     | keep my records without manually saving                       | `✓` |
+| `* * *`  | user            | record the application date for each application            | track when I applied                                          | `✓` |
+| `* * *`  | user            | attach a URL to an application                              | keep a reference to the original job posting                  | `✓` |
+| `* *`    | user            | copy an application's URL                                   | open the link quickly without retyping                        | `✓` |
+| `* *`    | user            | add notes to an application                                 | store reminders or interview details                          | `✓` |
+| `* *`    | user            | clear a note from an application                            | remove outdated notes                                         | `✓` |
+| `* *`    | user            | filter applications by company name                         | find relevant applications quickly                            | `✓` |
+| `* *`    | user            | filter applications by role                                 | find relevant applications quickly                            | `✓` |
+| `* *`    | user            | filter applications by application date or date range       | find applications submitted during a certain period           | `✓` |
+| `* *`    | user            | filter applications by URL                                  | find applications linked to a specific posting                | `✓` |
+| `* *`    | user            | filter applications by status                               | focus on applications at a specific stage                     | `✓` |
+| `* *`    | user            | restore the full application list after filtering           | return to viewing everything easily                           | `✓` |
+| `* *`    | user            | clear all applications in the current displayed list        | remove a group of shown applications quickly                  | `✓` |
+| `* *`    | user            | remove terminal applications from the current displayed list| keep my list clean by removing rejected or withdrawn entries  | `✓` |
+| `* *`    | expert user     | use short aliases for commands                              | type commands faster                                          | `✓` |
+| `* *`    | expert user     | remove aliases                                              | stop using shortcuts I no longer need                         | `✓` |
+| `* *`    | expert user     | view all saved aliases                                      | remember what shortcuts I created                             | `✓` |
+| `* *`    | expert user     | keep my aliases across restarts                             | avoid recreating them every time I open the app               | `✓` |
+| `* *`    | expert user     | cycle through previously entered commands                   | reuse or edit past commands quickly                           | `✓` |
+| `* *`    | user            | view the total number of applications by status             | track my overall progress                                     | `○` |
+| `* *`    | user            | view the potential pay of each position                     | compare opportunities more easily                             | `○` |
+| `* *`    | user            | filter applications by pay range                            | focus on opportunities within a salary range                  | `○` |
+| `*`      | user            | favourite companies                                         | keep track of companies I care about most                     | `○` |
+| `*`      | first-time user | see sample data on first launch                             | understand how the data is structured                         | `✓` |
+| `*`      | expert user     | use tab completion                                          | avoid typing full commands                                    | `○` |
+| `*`      | user            | pin the application window on top                           | keep it visible while browsing job portals                    | `○` |
+| `*`      | user            | undo a command                                              | recover from accidental changes                               | `○` |
+| `*`      | expert user     | export data into another file format                        | keep backups or reuse data elsewhere                          | `○` |
+| `*`      | expert user     | add tags to applications or companies                       | organize records with more flexibility                        | `○` |
 
 ### Use cases
 
@@ -969,7 +984,7 @@ testers are expected to do more *exploratory* testing.
     5. Test case: `find abc`  
        Expected: No applications are filtered. Error details are shown in the status message.
 
-    6. Other incorrect find commands to try: `find`, `find n/`, `find d/2025-12-12`, `find x/Google`  
+    6. Other incorrect find commands to try: `find`, `find n/`, `find x/Google`  
        Expected: Similar to previous.
 
 2. Finding applications after only some applications are being shown
@@ -984,6 +999,9 @@ testers are expected to do more *exploratory* testing.
 
     4. Test case: `find n/Google Meta`  
        Expected: All applications in the data with company names matching either `Google` or `Meta` are shown, including applications that were not shown before the command was entered.
+
+    5. Test case: `find u/https://www.google.com/`  
+       Expected: All applications in the data with URLs matching `careers.google.com` are shown, including applications that were not shown before the command was entered.
    
 ### Editing an application
 
