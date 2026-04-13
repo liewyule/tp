@@ -281,13 +281,14 @@ Edits an existing application in LockedIn.
 * `INDEX` must be a positive integer.
 * You must provide at least one field to edit.
 * Existing values are updated to the input values.
-* `COMPANY` and `ROLE` must not be blank.
-* `COMPANY` and `ROLE` may contain only [supported characters](#supported-characters).
-* `COMPANY` must be at most 100 characters long.
-* `ROLE` must be at most 100 characters long.
-* `APPLICATION_DATE` must be a valid date in the format `yyyy-MM-dd`.
+* `COMPANY` and `ROLE`, if provided, cannot be blank.
+* `COMPANY` and `ROLE`, if provided, may contain only [supported characters](#supported-characters).
+* `COMPANY`, if provided, must be at most 100 characters long.
+* `ROLE`, if provided, must be at most 100 characters long.
+* `APPLICATION_DATE`, if provided, must be a valid date in the format `yyyy-MM-dd`.
 * `URL`, if provided, must start with `http://` or `https://`.
-* Status input is case-insensitive. For example, `s/offered`, `s/Offered`, and `s/OFFERED` are all accepted.
+* `STATUS`, if provided, must be one of: `Applied`, `OA`, `Interview`, `Offered`, `Rejected`, `Withdrawn`.
+* `STATUS` input is case-insensitive. For example, `s/offered`, `s/Offered`, and `s/OFFERED` are all accepted.
 * If the edited values make the application a duplicate of an existing one, the edit is rejected.
 
 **Examples**
@@ -424,7 +425,7 @@ Adds or replaces the note of an existing application.
 
 Before                                | After                                   |
 | ------------------------------------ | --------------------------------------- |
-| ![beforeNote](images/beforeNote.png) | ![afterClearNote](images/afterNote.png) |
+| ![beforeNote](images/beforeNote.png) | ![afterNote](images/afterNote.png) |
 
 **Notes**
 
@@ -524,7 +525,7 @@ Moves an application to the next stage in the application workflow.
 
 | Before                               | After                              |
 | ------------------------------------ | ---------------------------------- |
-| ![beforeNext](images/beforeNext.png) | ![afterEdit](images/afterNext.png) |
+| ![beforeNext](images/beforeNext.png) | ![afterNext](images/afterNext.png) |
 
 **Format:** `next INDEX`
 
@@ -783,7 +784,7 @@ A: No. LockedIn currently supports only English letters, digits, spaces, and a [
 
 <br>
 
-**Q: Why does certain fonts not work properly?**<br>
+**Q: Why do certain fonts not work properly?**<br>
 A: LockedIn validates the company, role, and note fields using an ASCII-only character set, so other fonts not in the set may be rejected.
 
 <br>
